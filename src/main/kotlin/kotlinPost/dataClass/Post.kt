@@ -6,14 +6,14 @@ data class Post(
     val fromId: Int, //идентификатор автора записи (от чьего имени опубликована запись).
     val createdBy: Int,  //идентификатор администратора, который опубликовал запись.
     val date: Int, //время публикации записи в формате unixtime.
-    val text: String,//текст записи.
+    val text: String?,//текст записи.
     val replyOwnerId: Int, //идентификатор владельца записи, в ответ на которую была оставлена текущая.
     val replyPostId: Int, //идентификатор записи, в ответ на которую была оставлена текущая.
     val friendsOnly: Boolean, //true, если запись была создана с опцией «Только для друзей».
     val comments: Comments,  //информация о комментариях к записи, объект с полями:
     val copyright: Copyright,  //object источник материала, объект с полями:
-    val likes: Like, // object	информация о лайках к записи, объект с полями:
-    val reposts: Repost,  //object	информация о репостах записи («Рассказать друзьям»), объект с полями:
+    val likes: Like?, // object	информация о лайках к записи, объект с полями:
+    val reposts: Repost?,  //object	информация о репостах записи («Рассказать друзьям»), объект с полями:
     val views: View,  //object	информация о просмотрах записи. Объект с единственным полем:
     val postType: String,  //string	тип записи, может принимать следующие значения: post, copy, reply, postpone, suggest.
     val signerId: Int,  //integer	идентификатор автора, если запись была опубликована от имени сообщества и подписана пользователем;
@@ -54,7 +54,6 @@ data class Post(
     private fun checkIsPined(isPinned: Boolean): String {
         return if (isPinned) "Pined on page" else "Un Pined"
     }
-
 
     private fun checkPin(canPin: Boolean): String {
         return when {

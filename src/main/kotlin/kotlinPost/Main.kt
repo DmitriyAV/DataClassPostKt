@@ -1,5 +1,6 @@
 package kotlinPost
 
+import kotlinPost.attachment.AudioAttach
 import kotlinPost.dataClass.*
 import kotlinPost.wallServesesClass.WallServices
 
@@ -14,7 +15,7 @@ val view = View(viewRandom)
 val copyright = Copyright(copyrightRandom, "Link", "AuthorName", "Post")
 val likes = Like(true)
 val repost = Repost(true)
-val text = "Text data"
+val text = null
 
 
 fun main() {
@@ -36,12 +37,14 @@ fun main() {
         true, comments, copyright, likes, repost, view, copyright.type, 26, true,
         false, false, false, true, true, donut, 28)
 
-    serves.create(post)
-    serves.create(post1)
-    serves.create(post2)
+    serves.add(post)
+    serves.add(post1)
+    serves.add(post2)
     serves.print()
     serves.update(post3)
     serves.print()
+    serves.type(AudioAttach())
+    serves.printAttaches()
 }
 
 

@@ -12,16 +12,17 @@ class Comments(
     //(boolean) — может ли текущий пользователь открыть комментарии к записи.
 ) {
     private val count: Int = (0..100).random()
+    private val diable: String = "Disable to comments"
 
     @Override
     override fun toString(): String {
-        return "${isCommentOp(canOpen)}, ${isCommentCl(canClose)}, ${isCommentGr(groupsCanPost)}, ${isCommentPos(canPost)} "
+        return "${isCommentOp(canOpen)}, ${isCommentCl(canClose)}, ${isCommentGr(groupsCanPost)}, ${isCommentPos(canPost)}"
     }
 
     private fun isCommentOp(canOp: Boolean): String {
         val comment = when {
             canOp -> return "Can open comments"
-            else -> "Disable to comment"
+            else -> diable
         }
         return comment
     }
@@ -30,7 +31,7 @@ class Comments(
         val comment = when {
             canClo -> return "Can close comments"
 
-            else -> "Disable to comments"
+            else -> diable
         }
         return comment
     }
@@ -39,86 +40,18 @@ class Comments(
         val comment = when {
             grCanPos -> return "Group can post comments"
 
-            else -> "Disable to comments"
+            else -> diable
         }
         return comment
     }
 
     private fun isCommentPos(canPos: Boolean): String {
         val comment = when {
-            canPos -> return "Can post comment"
+            canPos -> return "Can post comment. \n Quantity of comment's is: $count"
 
-            else -> "Disable to comments"
+            else -> diable
         }
         return comment
     }
-
-
-    private fun canComment(str: String): String {
-        return if (str === "Disable to comments") str else {
-            "Quantity of comment's is: $count"
-            str
-        }
-    }
-}
-/*
-    private fun isComent(canOp: Boolean, canClo: Boolean, grCanPos: Boolean, canPos: Boolean): String {
-        val comment = when {
-            canOp -> return "Can open comments."
-            canClo -> return "Can close comments."
-            grCanPos -> return "Group can post comments"
-            canPos -> return "Can post comment"
-
-            else -> "Disable to comments"
-        }
-        return comment
-    }
-
-    private fun canComment(str: String): String {
-        return if (str === "Disable to comments") str else {
-            "Quantity of comment's is: $count $str"
-        }
-    }*/
-
-/*
-
-private fun isCommentOp(canOp: Boolean): String {
-    val comment = when {
-        canOp -> return "Can open comments."
-        else -> "Disable to comment"
-    }
-    return comment
-}
-private fun isCommentCl( canClo: Boolean ): String {
-    val comment = when {
-        canClo -> return "Can close comments."
-
-        else -> "Disable to comments"
-    }
-    return comment
-}
-private fun isCommentGr(grCanPos: Boolean): String {
-    val comment = when {
-        grCanPos -> return "Group can post comments"
-
-        else -> "Disable to comments"
-    }
-    return comment
-}
-private fun isCommentPos(canPos: Boolean): String {
-    val comment = when {
-        canPos -> return "Can post comment"
-
-        else -> "Disable to comments"
-    }
-    return comment
 }
 
-
-
-private fun canComment(str: String): String{
-    return if (str === "Disable to comments") str else {
-        "Quantity of coment's is: $count"
-        str
-    }
-}*/

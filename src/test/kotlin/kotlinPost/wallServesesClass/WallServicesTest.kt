@@ -12,7 +12,7 @@ class WallServicesTest {
     fun create() {
         val service = WallServices
 
-         service.create(Post(
+         service.add(Post(
              id = 0,
              ownerId = 14124,
              fromId = 12312,
@@ -98,20 +98,20 @@ class WallServicesTest {
 
         val serv = WallServices
 
-        serv.create( Post(
+        serv.add( Post(
             3, 3, 1, 2, 1, text, 2, 1,
             true, comments, copyright, likes, repost, view, copyright.type, 2, false,
             true, false, false, true, false, donut, 1
         ))
 
-        serv.create( Post(
+        serv.add( Post(
             1, 3, 2, 1, 1, text, 2, 1,
             true, comments, copyright, likes, repost, view, copyright.type, 2, false,
             true, false, false, true, false, donut, 1
         ))
 
         val update = ( Post(
-            4, 3, 1, 1, 1, text, 2, 1,
+            1, 3, 2, 1, 1, text, 2, 1,
             true, comments, copyright, likes, repost, view, copyright.type, 2, false,
             true, false, false, true, false, donut, 1
         ))
@@ -125,13 +125,13 @@ class WallServicesTest {
     fun update_false(){
         val serv = WallServices
 
-        serv.create( Post(
+        serv.add( Post(
             3, 3, 1, 2, 1, text, 2, 1,
             true, comments, copyright, likes, repost, view, copyright.type, 2, false,
             true, false, false, true, false, donut, 1
         ))
 
-        serv.create( Post(
+        serv.add( Post(
             1, 3, 2, 1, 1, text, 2, 1,
             true, comments, copyright, likes, repost, view, copyright.type, 2, false,
             true, false, false, true, false, donut, 1
