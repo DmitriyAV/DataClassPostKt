@@ -1,11 +1,15 @@
 package kotlinPost.wallServesesClass
 
 import kotlinPost.attachment.*
+import kotlinPost.dataClass.Comment
 import kotlinPost.dataClass.Post
+import kotlinPost.excaption.PostNotFoundException
 
 object WallServices {
     private var posts = emptyArray<Post>()
-    private var attaches = emptyArray<Attachment>()
+
+    private var comments = emptyArray<Comment>()
+
 
     fun add(posted: Post): Post {
         posts += posted
@@ -15,16 +19,18 @@ object WallServices {
         return posts.last()
     }
 
-    private fun attachesAdd(attach: Attachment): Attachment {
-        attaches += attach
-        return attaches.last()
+
+    fun addComment(comment: Comment): Comment {
+        comment.id + 1
+        for (post in posts) {
+            if (posts.isNotEmpty()) comment.id + 1
+            if (comment.id == post.id) comments += comment
+            else throw PostNotFoundException("$comment is not found in post!")
+        }
+        return comments.last()
     }
 
-    fun printAttaches() {
-        println(attaches.last().toString())
-    }
-
-    fun type(attach: Attachment){
+    /*fun type(attach: Attachment) {
         when (attach) {
             is AudioAttach -> attachesAdd(attach)
             is DocAttach -> attachesAdd(attach)
@@ -32,11 +38,14 @@ object WallServices {
             is PhotoAttach -> attachesAdd(attach)
             is VideoAttach -> attachesAdd(attach)
         }
-    }
+    }*/
 
     fun print() {
         println(posts.last()).toString()
-        println()
+    }
+
+    fun printComment(){
+        println(comments.last().toString())
     }
 
     fun update(post: Post): Boolean {

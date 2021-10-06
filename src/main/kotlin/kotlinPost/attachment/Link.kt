@@ -1,6 +1,6 @@
 package kotlinPost.attachment
 
-class Link(
+data class Link(
     val linkPath: String
 ) {
     override fun toString(): String {

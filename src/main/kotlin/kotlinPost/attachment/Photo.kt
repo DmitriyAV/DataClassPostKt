@@ -1,6 +1,6 @@
 package kotlinPost.attachment
 
-class Photo(
+data class Photo(
     val photoTitle: String
 ) {
     override fun toString(): String {
