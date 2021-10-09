@@ -1,6 +1,6 @@
 package kotlinPost.attachment
 
-class Audio(
+data class Audio(
     val trackTitle: String,
     val artistName: String,
     val duration: Int
