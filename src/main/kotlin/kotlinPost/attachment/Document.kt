@@ -1,6 +1,6 @@
 package kotlinPost.attachment
 
-class Document(
+data class Document(
     val fileTitle: String,
     val fileContent: String
 ) {

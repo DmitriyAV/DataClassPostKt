@@ -1,6 +1,6 @@
 package kotlinPost.attachment
 
-class Video(
+data class Video(
     val videoTitle: String,
     val authorName: String,
     val duration: Int
