@@ -25,7 +25,7 @@ object WallServices {
         for (post in posts) {
             if (posts.isNotEmpty()) comment.id + 1
             if (comment.id == post.id) comments += comment
-            else throw PostNotFoundException("$comment is not found in post!")
+            else throw PostNotFoundException("Comment by id #${comment.id} is not found in post!")
         }
         return comments.last()
     }
