@@ -10,7 +10,7 @@ class Thread(
    var items: Array<Int>? = null // (array) — массив объектов комментариев к записи (только для метода wall.getComments).
 
    override fun toString(): String {
-      return "${isThread(canPost)}, ${isThread(showReplyButton)}, ${isThread(groupsCanPost)}, Current quantity of comments in thread ${addCommentThread()}"
+      return "${isThread(canPost)}, ${button(showReplyButton)}, ${groupPost(groupsCanPost)},\n Current quantity of comments in thread ${addCommentThread()}"
    }
 
    private fun addCommentThread(){
@@ -18,10 +18,25 @@ class Thread(
       count + 1
    }
 
+
    fun isThread(canPost: Boolean): String {
       return when {
          canPost -> "You can comment in thread"
          else -> "You can't comment in thread"
+      }
+   }
+
+   fun button(showReplyButton: Boolean): String {
+      return when {
+         showReplyButton -> "Press Button"
+         else -> "There is no eny button"
+      }
+   }
+
+   fun groupPost(groupsCanPost: Boolean): String {
+      return when {
+         groupsCanPost -> "Group can post here"
+         else -> "Group can't post here"
       }
    }
 

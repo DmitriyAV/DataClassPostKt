@@ -30,15 +30,15 @@ val arrayParent = arrayOf(5)
 fun main() {
     val serves = WallServices
 
-    val post = Post(1, 2, 3, 4, dateRandom, text, 5, 6,
+    val post = Post(3, 2, 3, 4, dateRandom, text, 5, 6,
         false, comments, copyright, likes, repost, view, copyright.type, 7, false,
         true, false, false, true, false, donut, 8)
 
-    val post1 = Post(1, 11, 12, 13, dateRandom, text, 14, 15,
+    val post1 = Post(2, 11, 12, 13, dateRandom, text, 14, 15,
         true, comments, copyright, likes, repost, view, copyright.type, 16, true,
         true, false, true, false, false, donut, 17)
 
-    val post2 = Post(1, 21, 22, 23, dateRandom, text, 24, 25,
+    val post2 = Post(2, 21, 22, 23, dateRandom, text, 24, 25,
         true, comments, copyright, likes, repost, view, copyright.type, 26, true,
         false, false, false, true, true, donut, 27)
 
@@ -47,7 +47,7 @@ fun main() {
         false, false, false, true, true, donut, 28)
 
 
-    val comment = Comment(1, 2, 3, "New Comment", donut, 1, 1, Attachments.AudioAtt("audio") , arrayParent , thread)
+    val comment = Comment(2, 2, 3, "New Comment", donut, 1, 1, Attachments.AudioAtt(audioAttach), arrayParent, thread)
 
     serves.add(post)
     serves.add(post1)

@@ -1,7 +1,10 @@
 package kotlinPost.wallServesesClass
 
 import kotlinPost.*
+import kotlinPost.attachment.Attachments
+import kotlinPost.dataClass.Comment
 import kotlinPost.dataClass.Post
+import kotlinPost.excaption.PostNotFoundException
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -90,6 +93,30 @@ class WallServicesTest {
             isFavorite = false,
             donut = donut,
             postponedId = 12314), result )
+
+    }
+
+    @Test (expected = PostNotFoundException::class)
+    fun addComment() {
+        val ser = WallServices
+
+        ser.add( Post(
+            3, 3, 1, 2, 1, text, 2, 1,
+            true, comments, copyright, likes, repost, view, copyright.type, 2, false,
+            true, false, false, true, false, donut, 1
+        ))
+
+
+        ser.add(Post(
+            4, 211, 221, 231, 1, text, 24, 25,
+            true, comments, copyright, likes, repost, view, copyright.type, 26, true,
+            false, false, false, true, true, donut, 28))
+
+        val comm = (Comment(4, 2, 3, "New Comment", donut, 1,
+            1, Attachments.AudioAtt(audioAttach) , arrayParent , thread))
+
+        ser.addComment(comm)
+        ser.comments.isNotEmpty()
 
     }
 

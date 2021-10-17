@@ -16,13 +16,6 @@ data class Comment(
 
 ) {
 
-    private val audioAttach = Audio("some track title", "some artist name", 5)
-    private val videoAttach = Video("some video title", "some author name", 5)
-    private val docAttach = Document("some document title", "some file content")
-    private val linkAttach = Link("some link path")
-    private val photoAttach = Photo("some photo title")
-
-
     override fun toString(): String {
         return "Comment to post #$id from author #$fromId, \n" +
                 "posted at $date, \n" +
@@ -31,8 +24,8 @@ data class Comment(
                 "Comments reply to User: #$replyToUser}. " +
                 "Comment reply: #$replyToComment}.\n" +
                 "Attachments of comments: ${resultAttach(attachments).toString()} \n" +
-                "Parents Comments: $parentsStack \n" +
-                "Thread of them: ${thread.toString()}"
+                "Parents Comments: ${printArray(parentsStack)} \n" +
+                "Thread of them: $thread"
     }
 }
 
@@ -50,4 +43,10 @@ private fun attachesAdd(attachments: Any): Any {
    var attaches = emptyArray<Any>()
    attaches += attachments
     return attaches.last()
+}
+
+private fun printArray(parents: Array<Int>){
+    for (parent in parents){
+        println(parent.toString())
+    }
 }
