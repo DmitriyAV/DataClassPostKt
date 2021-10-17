@@ -8,7 +8,6 @@ import kotlinPost.excaption.PostNotFoundException
 import org.junit.Test
 
 import org.junit.Assert.*
-import kotlin.reflect.KClass
 
 class WallServicesTest {
 
@@ -117,7 +116,7 @@ class WallServicesTest {
             1, Attachments.AudioAtt(audioAttach) , arrayParent , thread))
 
         ser.addComment(comm)
-
+        ser.comments.isNotEmpty()
 
     }
 

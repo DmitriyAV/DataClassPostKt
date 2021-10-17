@@ -7,8 +7,7 @@ import kotlinPost.excaption.PostNotFoundException
 
 object WallServices {
     private var posts = emptyArray<Post>()
-
-    private var comments = emptyArray<Comment>()
+    var comments = emptyArray<Comment>()
 
 
     fun add(posted: Post): Post {
@@ -20,14 +19,15 @@ object WallServices {
     }
 
 
-    fun addComment(comment: Comment): Comment {
-        comment.id + 1
+    fun addComment(comment: Comment) {
         for (post in posts) {
-            if (posts.isNotEmpty()) comment.id + 1
-            if (comment.id == post.id) comments += comment
-            else throw PostNotFoundException("Comment by id #${comment.id} is not found in post!")
+            when (posts.isNotEmpty()) {
+                comment.id == post.id -> comments += comment
+                else -> {
+                    throw PostNotFoundException("Comment by id #${comment.id} is not found in post!")
+                }
+            }
         }
-        return comments.last()
     }
 
     /*fun type(attach: Attachment) {
@@ -44,7 +44,7 @@ object WallServices {
         println(posts.last()).toString()
     }
 
-    fun printComment(){
+    fun printComment() {
         println(comments.last().toString())
     }
 

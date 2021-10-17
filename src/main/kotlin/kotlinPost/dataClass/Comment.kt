@@ -25,7 +25,7 @@ data class Comment(
                 "Comment reply: #$replyToComment}.\n" +
                 "Attachments of comments: ${resultAttach(attachments).toString()} \n" +
                 "Parents Comments: ${printArray(parentsStack)} \n" +
-                "Thread of them: ${thread.toString()}"
+                "Thread of them: $thread"
     }
 }
 

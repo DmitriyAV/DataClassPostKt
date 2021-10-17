@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kotlinPost.wallServesesClass.WallServicesTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-10-06T13:48:42" hostname="DESKTOP-6MIRB32" time="0.238">
-  <properties/>
-  <testcase name="create" classname="kotlinPost.wallServesesClass.WallServicesTest" time="0.237"/>
-  <testcase name="update" classname="kotlinPost.wallServesesClass.WallServicesTest" time="0.0"/>
-  <testcase name="update_false" classname="kotlinPost.wallServesesClass.WallServicesTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
