@@ -1,16 +1,16 @@
 package kotlinPost.dataClass
 
-data class Post(
-    var id: Int = 0, //идентификатор записи
+data class Post (
+    override var id: Int = 0, //идентификатор записи
     val ownerId: Int, //идентификатор владельца стены, на которой размещена запись.
-    val fromId: Int, //идентификатор автора записи (от чьего имени опубликована запись).
+    override val fromId: Int, //идентификатор автора записи (от чьего имени опубликована запись).
     val createdBy: Int,  //идентификатор администратора, который опубликовал запись.
-    val date: Int, //время публикации записи в формате unixtime.
-    val text: String?,//текст записи.
+    override val date: Int, //время публикации записи в формате unixtime.
+    override val message: String?, //текст записи.
     val replyOwnerId: Int, //идентификатор владельца записи, в ответ на которую была оставлена текущая.
     val replyPostId: Int, //идентификатор записи, в ответ на которую была оставлена текущая.
     val friendsOnly: Boolean, //true, если запись была создана с опцией «Только для друзей».
-    val comments: Comments,  //информация о комментариях к записи, объект с полями:
+    var comments: Comment?,  //информация о комментариях к записи, объект с полями:
     val copyright: Copyright,  //object источник материала, объект с полями:
     val likes: Like?, // object	информация о лайках к записи, объект с полями:
     val reposts: Repost?,  //object	информация о репостах записи («Рассказать друзьям»), объект с полями:
@@ -25,20 +25,21 @@ data class Post(
     val isFavorite: Boolean, // boolean	true, если объект добавлен в закладки у текущего пользователя.
     val donut: Donut, // object	информация о записи VK Donut:
     val postponedId: Int, // Идентификатор отложенной записи. Это поле возвращается тогда, когда запись стояла на таймере.
-) {
+) : Element(id, fromId, date, message){
+
 
     @Override
     override fun toString(): String {
         return "Запись $id на стене $ownerId от автора $fromId создана ${postAdminId(date)} ч. назад \n" +
                 "Дата $date: \n" +
-                "$text,  \n" +
-                "${comments.toString()}, \n" +
-                "${copyright.toString()}, \n" +
-                "${likes.toString()},  ${reposts.toString()},  ${views.toString()} \n" +
+                "$message,  \n" +
+                "Comments: ${comments.toString()}, \n" +
+                "$copyright, \n" +
+                "${likes.toString()},  ${reposts.toString()},  $views \n" +
                 "$postType, Signer: $signerId \n" +
                 "${checkPin(canPin)}, ${checkEdit(canEdit)},  ${checkDelete(canDelete)} ${checkIsPined(isPinned)}\n" +
                 "${commercial(markedAsAds)}, ${isFav(isFavorite)} \n" +
-                "Donut's: ${donut.toString()}, \n" +
+                "Donut's: $donut, \n" +
                 "Postponed: $postponedId " +
                 "\n"
     }

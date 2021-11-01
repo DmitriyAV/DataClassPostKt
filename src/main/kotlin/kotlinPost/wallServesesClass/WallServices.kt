@@ -1,61 +1,34 @@
 package kotlinPost.wallServesesClass
 
-import kotlinPost.attachment.*
-import kotlinPost.dataClass.Comment
-import kotlinPost.dataClass.Post
+import kotlinPost.dataClass.Element
 import kotlinPost.excaption.PostNotFoundException
 
-object WallServices {
-    private var posts = emptyArray<Post>()
-    var comments = emptyArray<Comment>()
+abstract class WallServices<E : Element> {
 
+    var elements = mutableListOf<E>()
+    var deletedList = mutableListOf<E>()
 
-    fun add(posted: Post): Post {
-        posts += posted
-        for (post in posts) {
-            if (posts.isNotEmpty()) posts.last().id + 1
-        }
-        return posts.last()
+    fun add(element: E): E {
+        elements += element
+        return elements.last()
     }
 
+    fun delete(elem: E): E {
 
-    fun addComment(comment: Comment) {
-        for (post in posts) {
-            when (posts.isNotEmpty()) {
-                comment.id == post.id -> comments += comment
-                else -> {
-                    throw PostNotFoundException("Comment by id #${comment.id} is not found in post!")
-                }
-            }
-        }
+        deletedList += elem
+        elements.remove(elem)
+        return deletedList.last()
     }
 
-    /*fun type(attach: Attachment) {
-        when (attach) {
-            is AudioAttach -> attachesAdd(attach)
-            is DocAttach -> attachesAdd(attach)
-            is LinkAttach -> attachesAdd(attach)
-            is PhotoAttach -> attachesAdd(attach)
-            is VideoAttach -> attachesAdd(attach)
-        }
-    }*/
+    fun getById(id: Int): E {
+        return elements.find { it.id == id } ?: throw PostNotFoundException("Comment by id #$id is not found in post!")
+    }
+
+    fun get(): List<E> {
+        return elements.sortedBy { it.date }
+    }
 
     fun print() {
-        println(posts.last()).toString()
+        println(elements.last()).toString()
     }
-
-    fun printComment() {
-        println(comments.last().toString())
-    }
-
-    fun update(post: Post): Boolean {
-        for ((index, postInPosts) in posts.withIndex()) {
-            if (postInPosts.id == post.id) {
-                posts[index] = post.copy(id = postInPosts.id, date = postInPosts.date)
-                return true
-            }
-        }
-        return false
-    }
-
 }
