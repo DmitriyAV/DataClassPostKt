@@ -3,7 +3,8 @@ package kotlinPost.wallServesesClass
 import kotlinPost.*
 import kotlinPost.attachment.Attachments
 import kotlinPost.dataClass.Comment
-import kotlinPost.dataClass.E
+
+import kotlinPost.dataClass.Post
 import kotlinPost.excaption.PostNotFoundException
 import org.junit.Test
 
@@ -13,15 +14,15 @@ class WallServicesTest {
 
     @Test
     fun create() {
-        val service = WallServices
+        val service = WallService()
 
-         service.add(E(
+         service.add(Post(
              id = 0,
              ownerId = 14124,
              fromId = 12312,
              createdBy = 1231,
              date = 21,
-             text = text,
+             message = text,
              replyOwnerId = 2123,
              replyPostId = 14112,
              friendsOnly = true,
@@ -42,13 +43,13 @@ class WallServicesTest {
              postponedId = 12314
          ))
 
-        val result = E(
+        val result = Post(
             id = 0,
             ownerId = 14124,
             fromId = 12312,
             createdBy = 1231,
             date = 21,
-            text = text,
+            message = text,
             replyOwnerId = 2123,
             replyPostId = 14112,
             friendsOnly = true,
@@ -69,12 +70,12 @@ class WallServicesTest {
             postponedId = 12314
         )
 
-        assertEquals( E( id = 0,
+        assertEquals( Post( id = 0,
             ownerId = 14124,
             fromId = 12312,
             createdBy = 1231,
             date = 21,
-            text = text,
+            message = text,
             replyOwnerId = 2123,
             replyPostId = 14112,
             friendsOnly = true,
@@ -98,39 +99,39 @@ class WallServicesTest {
 
     @Test (expected = PostNotFoundException::class)
     fun get() {
+        val arrayParent = arrayOf(5)
+        val ser = CommentService()
+        val serv = WallService()
 
-        val ser = WallServices
-
-        ser.add( E(
-            3, 3, 1, 2, 1, text, 2, 1,
-            true, comment, copyright, likes, repost, view, copyright.type, 2, false,
-            true, false, false, true, false, donut, 1
-        ))
+        ser.add( Comment(2, 2, 3, "New Comment", donut, 1, 1,
+        Attachments.AudioAtt(audioAttach), arrayParent, thread, true, true, true, true))
 
 
-        ser.add(E(
+        serv.add(Post(
             4, 211, 221, 231, 1, text, 24, 25,
             true, comment, copyright, likes, repost, view, copyright.type, 26, true,
             false, false, false, true, true, donut, 28))
 
-        val comm = (Comment(4, 2, 3, "New Comment", donut, 1,
+        val comm = (Comment(3, 2, 3, "New Comment", donut, 1,
             1, Attachments.AudioAtt(audioAttach) , arrayParent , thread, true, true, true, true))
 
-        ser.addComment(comm)
-        ser.get(comm.id)
+        serv.addComment(comm)
+        serv.getById(comm.id)
     }
+
     @Test
     fun addComment() {
-        val ser = WallServices
+        val ser = WallService()
 
-        ser.add( E(
+
+        ser.add( Post(
             3, 3, 1, 2, 1, text, 2, 1,
             true, comment, copyright, likes, repost, view, copyright.type, 2, false,
             true, false, false, true, false, donut, 1
         ))
 
 
-        ser.add(E(
+        ser.add(Post(
             4, 211, 221, 231, 1, text, 24, 25,
             true, comment, copyright, likes, repost, view, copyright.type, 26, true,
             false, false, false, true, true, donut, 28))
@@ -144,54 +145,54 @@ class WallServicesTest {
     @Test
     fun update() {
 
-        val serv = WallServices
+        val serv = WallService()
 
-        serv.add( E(
+        serv.add( Post(
             3, 3, 1, 2, 1, text, 2, 1,
             true, comment, copyright, likes, repost, view, copyright.type, 2, false,
             true, false, false, true, false, donut, 1
         ))
 
-        serv.add( E(
+        serv.add( Post(
             1, 3, 2, 1, 1, text, 2, 1,
             true, comment, copyright, likes, repost, view, copyright.type, 2, false,
             true, false, false, true, false, donut, 1
         ))
 
-        val update = ( E(
+        val update = ( Post(
             1, 3, 4, 8, 6, text, 2, 1,
             true, comment, copyright, likes, repost, view, copyright.type, 2, false,
             true, false, false, true, false, donut, 1
         ))
 
-        val result = serv.update(update)
+        val result = serv.updatePost(update)
 
         assertTrue(result)
     }
 
     @Test
     fun update_false(){
-        val serv = WallServices
+        val serv = WallService()
 
-        serv.add( E(
+        serv.add( Post(
             3, 3, 1, 2, 1, text, 2, 1,
             true, comment, copyright, likes, repost, view, copyright.type, 2, false,
             true, false, false, true, false, donut, 1
         ))
 
-        serv.add( E(
+        serv.add( Post(
             1, 3, 2, 1, 1, text, 2, 1,
             true, comment, copyright, likes, repost, view, copyright.type, 2, false,
             true, false, false, true, false, donut, 1
         ))
 
-        val update = ( E(
+        val update = ( Post(
             31, 3, 1, 1, 1, text, 2, 1,
             true, comment, copyright, likes, repost, view, copyright.type, 2, false,
             true, false, false, true, false, donut, 1
         ))
 
-        val result = serv.update(update)
+        val result = serv.updatePost(update)
 
         assertFalse(result)
     }
