@@ -1,8 +1,11 @@
 package kotlinPost
 
+import User
 import kotlinPost.attachment.*
 import kotlinPost.dataClass.*
+import kotlinPost.dataClass.dt_directmasseges.Message
 import kotlinPost.wallServesesClass.CommentService
+import kotlinPost.wallServesesClass.DMService
 import kotlinPost.wallServesesClass.NoteService
 import kotlinPost.wallServesesClass.WallService
 
@@ -33,9 +36,10 @@ val title: String = "Title of new Object."
 
 fun main() {
 
-    val wallServ = WallService()
-    val noteServ = NoteService()
-    val commServ = CommentService()
+    val wallServ = WallService
+    val noteServ = NoteService
+    val commServ = CommentService
+    val dMServ = DMService
 
     val post = Post(3, 2, 3, 4, dateRandom, text, 5, 6,
         false, comment, copyright, likes, repost, view, copyright.type, 7, false,
@@ -58,7 +62,62 @@ fun main() {
     val note2 = Note(3, 3, dateRandom, message, title, comment)
     val note3 = Note(2, 4, dateRandom, message, title, comment)
 
-    // Добавление Постов
+  /*  val message1 = Message(1, dateRandom, 1, title, false)
+    val message2 = Message(2, dateRandom, 2, title )
+    val message3 = Message(1, dateRandom, 3, title, false)
+    val message4 = Message(2, dateRandom, 4, title)
+    val message5 = Message(1, dateRandom, 5, title, false)
+    val message6 = Message(2, dateRandom, 6, title)
+    val message7 = Message(1, dateRandom, 7, title, false)
+    val message8 = Message(2, dateRandom, 8, title)
+
+    val user1 = User(1)
+    val user2 = User(2)
+
+    dMServ.addUsers(user1)
+    dMServ.addUsers(user2)
+    dMServ.addMessage(message1, user1)
+    dMServ.addMessage(message2, user2)
+    dMServ.addMessage(message3, user1)
+    dMServ.addMessage(message4, user2)
+    dMServ.addMessage(message5, user1)
+    dMServ.addMessage(message6, user2)
+    dMServ.addMessage(message7, user1)
+    dMServ.addMessage(message8,user2)*/
+
+    val message = Message(2, dateRandom ,1 , title , true)
+    val message2 = Message(4, dateRandom ,   2, title,true)
+    val message3 = Message(2, dateRandom , 3, title , false)
+    val message4 = Message(3, dateRandom ,  4, title ,true)
+    val message5 = Message(2, dateRandom ,   5, title,true)
+    val message6 = Message(2, dateRandom ,6, title , true)
+
+    val user = User(2)
+    val user2 = User(4)
+    val user4 = User(3)
+    val user6 = User(6)
+
+    val chatService = DMService
+
+    chatService.addUsers(user)
+    chatService.addUsers(user2)
+    chatService.addUsers(user4)
+
+    chatService.addMessage(message, user)
+    chatService.addMessage(message2, user2)
+    chatService.addMessage(message3, user )
+
+    chatService.getMessage(user4)
+    chatService.getMessagesWithId(user2, 2, 1)
+    chatService.getUnreadChatsCount(user2)
+    chatService.updateMessage(user, message5, message4)
+    chatService.deleteMessage(user2, message2)
+    chatService.deleteChat(user2)
+    chatService.getChats()
+
+
+
+   /* // Добавление Постов
     wallServ.add(post)
     wallServ.add(post1)
     wallServ.add(post2)
@@ -92,7 +151,7 @@ fun main() {
     noteServ.delete(note1)
     println("delete note________________________")
     noteServ.deleteComment(note1, commentNew)
-    noteServ.print()
+    noteServ.print()*/
 
 }
 

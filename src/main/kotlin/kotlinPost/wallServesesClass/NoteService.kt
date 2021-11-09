@@ -4,10 +4,7 @@ import kotlinPost.dataClass.Comment
 import kotlinPost.dataClass.Note
 
 
-class NoteService : WallServices<Note>() {
-
-    var conunt: Int = 0
-    var sort: Int = 0
+object NoteService : WallServices<Note>() {
 
     fun updateNote(note: Note): Boolean {
         for ((index, noteInNotes) in elements.withIndex()) {

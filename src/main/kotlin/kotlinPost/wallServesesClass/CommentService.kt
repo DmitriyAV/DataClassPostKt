@@ -2,7 +2,7 @@ package kotlinPost.wallServesesClass
 
 import kotlinPost.dataClass.Comment
 
-class CommentService : WallServices<Comment>() {
+object CommentService : WallServices<Comment>() {
 
     fun deleteComment(comment: Comment) {
         getById(comment.id).commentList.remove(comment)

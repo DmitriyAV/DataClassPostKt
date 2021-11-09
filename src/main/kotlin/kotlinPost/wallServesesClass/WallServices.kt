@@ -14,7 +14,6 @@ abstract class WallServices<E : Element> {
     }
 
     fun delete(elem: E): E {
-
         deletedList += elem
         elements.remove(elem)
         return deletedList.last()

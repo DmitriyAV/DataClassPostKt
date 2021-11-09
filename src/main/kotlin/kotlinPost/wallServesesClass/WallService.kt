@@ -4,7 +4,7 @@ import kotlinPost.comment
 import kotlinPost.dataClass.Comment
 import kotlinPost.dataClass.Post
 
-class WallService : WallServices<Post>() {
+object WallService : WallServices<Post>() {
 
 
     fun updatePost(post: Post): Boolean {

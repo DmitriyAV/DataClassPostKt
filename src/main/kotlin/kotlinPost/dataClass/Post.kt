@@ -6,7 +6,7 @@ data class Post (
     override val fromId: Int, //идентификатор автора записи (от чьего имени опубликована запись).
     val createdBy: Int,  //идентификатор администратора, который опубликовал запись.
     override val date: Int, //время публикации записи в формате unixtime.
-    override val message: String?, //текст записи.
+     val message: String?, //текст записи.
     val replyOwnerId: Int, //идентификатор владельца записи, в ответ на которую была оставлена текущая.
     val replyPostId: Int, //идентификатор записи, в ответ на которую была оставлена текущая.
     val friendsOnly: Boolean, //true, если запись была создана с опцией «Только для друзей».
@@ -25,7 +25,7 @@ data class Post (
     val isFavorite: Boolean, // boolean	true, если объект добавлен в закладки у текущего пользователя.
     val donut: Donut, // object	информация о записи VK Donut:
     val postponedId: Int, // Идентификатор отложенной записи. Это поле возвращается тогда, когда запись стояла на таймере.
-) : Element(id, fromId, date, message){
+) : Element(id, fromId, date){
 
 
     @Override
