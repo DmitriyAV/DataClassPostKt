@@ -3,10 +3,10 @@ package kotlinPost.dataClass
 import kotlinPost.attachment.*
 
 data class Comment(
-    override val id: Int, //integer идентификатор комментария.
-    override val fromId: Int, //integer идентификатор автора комментария.
-    override val date: Int, //integer	дата создания комментария в формате Unixtime.
-     val message: String, //string текст комментария.
+    val id: Int, //integer идентификатор комментария.
+    val fromId: Int, //integer идентификатор автора комментария.
+    val date: Int, //integer	дата создания комментария в формате Unixtime.
+    val message: String, //string текст комментария.
     val donut: Donut, //object информация о VK Donut. Объект со следующими полями:
     var replyToUser: Int?, //integer	идентификатор пользователя или сообщества, в ответ которому оставлен текущий комментарий (если применимо).
     var replyToComment: Int?, //integer	идентификатор комментария, в ответ на который оставлен текущий (если применимо).
@@ -18,9 +18,7 @@ data class Comment(
     val canClose: Boolean, //(boolean) — может ли текущий пользователь закрыть комментарии к записи;
     val canOpen: Boolean, //(boolean) — может ли текущий пользователь открыть комментарии к записи.
 
-) : Element(id, fromId, date) {
-
-    var commentList = mutableListOf<Comment>()
+) {
 
     override fun toString(): String {
         return "Comment to post #$id from author #$fromId, \n" +

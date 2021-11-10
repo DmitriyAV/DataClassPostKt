@@ -62,62 +62,50 @@ fun main() {
     val note2 = Note(3, 3, dateRandom, message, title, comment)
     val note3 = Note(2, 4, dateRandom, message, title, comment)
 
-  /*  val message1 = Message(1, dateRandom, 1, title, false)
-    val message2 = Message(2, dateRandom, 2, title )
-    val message3 = Message(1, dateRandom, 3, title, false)
-    val message4 = Message(2, dateRandom, 4, title)
-    val message5 = Message(1, dateRandom, 5, title, false)
-    val message6 = Message(2, dateRandom, 6, title)
-    val message7 = Message(1, dateRandom, 7, title, false)
-    val message8 = Message(2, dateRandom, 8, title)
+    val user = 2
+    val user2 = 4
+    val user4 = 3
+    val user6 = 6
 
-    val user1 = User(1)
-    val user2 = User(2)
+    val message = Message(4, 2, dateRandom, 1, title, true)
+    val message2 = Message(3, 4, dateRandom, 2, title, true)
+    val message3 = Message(4, 2, dateRandom, 3, title, false)
+    val message4 = Message(2, 3, dateRandom, 4, title, true)
+    val message5 = Message(4, 2, dateRandom, 5, title, true)
+    val message6 = Message(3, 2, dateRandom, 6, title, true)
 
-    dMServ.addUsers(user1)
-    dMServ.addUsers(user2)
-    dMServ.addMessage(message1, user1)
-    dMServ.addMessage(message2, user2)
-    dMServ.addMessage(message3, user1)
-    dMServ.addMessage(message4, user2)
-    dMServ.addMessage(message5, user1)
-    dMServ.addMessage(message6, user2)
-    dMServ.addMessage(message7, user1)
-    dMServ.addMessage(message8,user2)*/
-
-    val message = Message(2, dateRandom ,1 , title , true)
-    val message2 = Message(4, dateRandom ,   2, title,true)
-    val message3 = Message(2, dateRandom , 3, title , false)
-    val message4 = Message(3, dateRandom ,  4, title ,true)
-    val message5 = Message(2, dateRandom ,   5, title,true)
-    val message6 = Message(2, dateRandom ,6, title , true)
-
-    val user = User(2)
-    val user2 = User(4)
-    val user4 = User(3)
-    val user6 = User(6)
+    /*   val user = User(2)
+       val user2 = User(4)
+       val user4 = User(3)
+       val user6 = User(6)*/
 
     val chatService = DMService
-
+/*
     chatService.addUsers(user)
     chatService.addUsers(user2)
-    chatService.addUsers(user4)
+    chatService.addUsers(user4)*/
 
-    chatService.addMessage(message, user)
-    chatService.addMessage(message2, user2)
-    chatService.addMessage(message3, user )
-
-    chatService.getMessage(user4)
-    chatService.getMessagesWithId(user2, 2, 1)
-    chatService.getUnreadChatsCount(user2)
-    chatService.updateMessage(user, message5, message4)
-    chatService.deleteMessage(user2, message2)
-    chatService.deleteChat(user2)
+    chatService.addMessage(message)
+    chatService.addMessage(message2)
+    chatService.addMessage(message3)
+    chatService.addMessage(message5)
+    chatService.addMessage(message6)
+    chatService.getChats()
+    println("Act some changes")
+    println("______________________________________________________________")
+    chatService.getMessage(user2)
+    println("______________________________________________________________")
+   // chatService.getMessagesWithId(user2, 2, 1)
+    chatService.printGetMessages(chatService.getMessagesWithId(user2, 2, 1), user2)
+    println("______________________________________________________________")
+    println(chatService.getUnreadChatsCount())
+    chatService.updateMessage(message3, message4)
+    chatService.deleteMessage(user4, user2, 2)
+    chatService.deleteChat(user2, user)
     chatService.getChats()
 
 
-
-   /* // Добавление Постов
+    /*// Добавление Постов
     wallServ.add(post)
     wallServ.add(post1)
     wallServ.add(post2)
@@ -138,7 +126,7 @@ fun main() {
     println("NOTE________________________")
     // Добавление комментария к Заметке
     noteServ.addComment(note1, commentNew)
-    println("Added comment ${noteServ.getById(commentNew.id).commentNote}")
+    println("Added comment ${noteServ.getById(commentNew.id)}")
     println("_________________________")
     noteServ.print()
     println("Com to NOTE________________________")
