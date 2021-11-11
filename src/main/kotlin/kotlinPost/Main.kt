@@ -1,8 +1,11 @@
 package kotlinPost
 
+import User
 import kotlinPost.attachment.*
 import kotlinPost.dataClass.*
+import kotlinPost.dataClass.dt_directmasseges.Message
 import kotlinPost.wallServesesClass.CommentService
+import kotlinPost.wallServesesClass.DMService
 import kotlinPost.wallServesesClass.NoteService
 import kotlinPost.wallServesesClass.WallService
 
@@ -33,9 +36,10 @@ val title: String = "Title of new Object."
 
 fun main() {
 
-    val wallServ = WallService()
-    val noteServ = NoteService()
-    val commServ = CommentService()
+    val wallServ = WallService
+    val noteServ = NoteService
+    val commServ = CommentService
+    val dMServ = DMService
 
     val post = Post(3, 2, 3, 4, dateRandom, text, 5, 6,
         false, comment, copyright, likes, repost, view, copyright.type, 7, false,
@@ -58,7 +62,50 @@ fun main() {
     val note2 = Note(3, 3, dateRandom, message, title, comment)
     val note3 = Note(2, 4, dateRandom, message, title, comment)
 
-    // Добавление Постов
+    val user = 2
+    val user2 = 4
+    val user4 = 3
+    val user6 = 6
+
+    val message = Message(4, 2, dateRandom, 1, title, true)
+    val message2 = Message(3, 4, dateRandom, 2, title, true)
+    val message3 = Message(4, 2, dateRandom, 3, title, false)
+    val message4 = Message(2, 3, dateRandom, 4, title, true)
+    val message5 = Message(4, 2, dateRandom, 5, title, true)
+    val message6 = Message(3, 2, dateRandom, 6, title, true)
+
+    /*   val user = User(2)
+       val user2 = User(4)
+       val user4 = User(3)
+       val user6 = User(6)*/
+
+    val chatService = DMService
+/*
+    chatService.addUsers(user)
+    chatService.addUsers(user2)
+    chatService.addUsers(user4)*/
+
+    chatService.addMessage(message)
+    chatService.addMessage(message2)
+    chatService.addMessage(message3)
+    chatService.addMessage(message5)
+    chatService.addMessage(message6)
+    chatService.getChats()
+    println("Act some changes")
+    println("______________________________________________________________")
+    chatService.getMessage(user2)
+    println("______________________________________________________________")
+   // chatService.getMessagesWithId(user2, 2, 1)
+    chatService.printGetMessages(chatService.getMessagesWithId(user2, 2, 1), user2)
+    println("______________________________________________________________")
+    println(chatService.getUnreadChatsCount())
+    chatService.updateMessage(message3, message4)
+    chatService.deleteMessage(user4, user2, 2)
+    chatService.deleteChat(user2, user)
+    chatService.getChats()
+
+
+    /*// Добавление Постов
     wallServ.add(post)
     wallServ.add(post1)
     wallServ.add(post2)
@@ -79,7 +126,7 @@ fun main() {
     println("NOTE________________________")
     // Добавление комментария к Заметке
     noteServ.addComment(note1, commentNew)
-    println("Added comment ${noteServ.getById(commentNew.id).commentNote}")
+    println("Added comment ${noteServ.getById(commentNew.id)}")
     println("_________________________")
     noteServ.print()
     println("Com to NOTE________________________")
@@ -92,7 +139,7 @@ fun main() {
     noteServ.delete(note1)
     println("delete note________________________")
     noteServ.deleteComment(note1, commentNew)
-    noteServ.print()
+    noteServ.print()*/
 
 }
 

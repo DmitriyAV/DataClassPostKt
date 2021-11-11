@@ -1,12 +1,12 @@
 package kotlinPost.dataClass
 
-data class Post (
-    override var id: Int = 0, //идентификатор записи
+data class Post(
+    var id: Int = 0, //идентификатор записи
     val ownerId: Int, //идентификатор владельца стены, на которой размещена запись.
-    override val fromId: Int, //идентификатор автора записи (от чьего имени опубликована запись).
+    val fromId: Int, //идентификатор автора записи (от чьего имени опубликована запись).
     val createdBy: Int,  //идентификатор администратора, который опубликовал запись.
-    override val date: Int, //время публикации записи в формате unixtime.
-    override val message: String?, //текст записи.
+    val date: Int, //время публикации записи в формате unixtime.
+    val message: String?, //текст записи.
     val replyOwnerId: Int, //идентификатор владельца записи, в ответ на которую была оставлена текущая.
     val replyPostId: Int, //идентификатор записи, в ответ на которую была оставлена текущая.
     val friendsOnly: Boolean, //true, если запись была создана с опцией «Только для друзей».
@@ -25,8 +25,7 @@ data class Post (
     val isFavorite: Boolean, // boolean	true, если объект добавлен в закладки у текущего пользователя.
     val donut: Donut, // object	информация о записи VK Donut:
     val postponedId: Int, // Идентификатор отложенной записи. Это поле возвращается тогда, когда запись стояла на таймере.
-) : Element(id, fromId, date, message){
-
+) {
 
     @Override
     override fun toString(): String {
@@ -62,12 +61,14 @@ data class Post (
             else -> "You haven't access to pin"
         }
     }
+
     private fun checkEdit(canEdit: Boolean): String {
         return when {
             canEdit -> " You can edited"
             else -> "You haven't access to edit"
         }
     }
+
     private fun checkDelete(canDelete: Boolean): String {
         return when {
             canDelete -> "You can delete"
@@ -79,7 +80,7 @@ data class Post (
         return if (markedAsAds) "Commercial post" else "Un commercial post"
     }
 
-    private fun isFav(isFavorite: Boolean): String{
+    private fun isFav(isFavorite: Boolean): String {
         return if (isFavorite) "Post add in favorites" else "Post doesn't add in favorites"
     }
 }

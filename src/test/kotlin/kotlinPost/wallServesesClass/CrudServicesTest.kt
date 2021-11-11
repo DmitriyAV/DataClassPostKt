@@ -10,11 +10,11 @@ import org.junit.Test
 
 import org.junit.Assert.*
 
-class WallServicesTest {
+class CrudServicesTest {
 
     @Test
     fun create() {
-        val service = WallService()
+        val service = WallService
 
          service.add(Post(
              id = 0,
@@ -100,8 +100,8 @@ class WallServicesTest {
     @Test (expected = PostNotFoundException::class)
     fun get() {
         val arrayParent = arrayOf(5)
-        val ser = CommentService()
-        val serv = WallService()
+        val ser = CommentService
+        val serv = WallService
 
         ser.add( Comment(2, 2, 3, "New Comment", donut, 1, 1,
         Attachments.AudioAtt(audioAttach), arrayParent, thread, true, true, true, true))
@@ -121,7 +121,7 @@ class WallServicesTest {
 
     @Test
     fun addComment() {
-        val ser = WallService()
+        val ser = WallService
 
 
         ser.add( Post(
@@ -145,7 +145,7 @@ class WallServicesTest {
     @Test
     fun update() {
 
-        val serv = WallService()
+        val serv = WallService
 
         serv.add( Post(
             3, 3, 1, 2, 1, text, 2, 1,
@@ -172,7 +172,7 @@ class WallServicesTest {
 
     @Test
     fun update_false(){
-        val serv = WallService()
+        val serv = WallService
 
         serv.add( Post(
             3, 3, 1, 2, 1, text, 2, 1,
