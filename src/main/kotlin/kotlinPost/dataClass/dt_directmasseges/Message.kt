@@ -9,8 +9,6 @@ data class Message(
     val message: String,
     var isEntered: Boolean = true,
     var isRead: Boolean = false,
-
-
     ) {
 
     private fun setIsReadied(): String {

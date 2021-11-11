@@ -70,7 +70,7 @@ fun main() {
     val message = Message(4, 2, dateRandom, 1, title, true)
     val message2 = Message(3, 4, dateRandom, 2, title, true)
     val message3 = Message(4, 2, dateRandom, 3, title, false)
-    val message4 = Message(2, 3, dateRandom, 4, title, true)
+    val message4 = Message(2, 3, dateRandom, 10, title, true)
     val message5 = Message(4, 2, dateRandom, 5, title, true)
     val message6 = Message(3, 2, dateRandom, 6, title, true)
 
@@ -95,11 +95,11 @@ fun main() {
     println("______________________________________________________________")
     chatService.getMessage(user2)
     println("______________________________________________________________")
-   // chatService.getMessagesWithId(user2, 2, 1)
-    chatService.printGetMessages(chatService.getMessagesWithId(user2, 2, 1), user2)
+    chatService.getMessagesWithId(user2, 2, 1)
     println("______________________________________________________________")
-    println(chatService.getUnreadChatsCount())
+    println("Unread chats is: ${chatService.getUnreadChatsCount()}")
     chatService.updateMessage(message3, message4)
+    println("______________________________________________________________")
     chatService.deleteMessage(user4, user2, 2)
     chatService.deleteChat(user2, user)
     chatService.getChats()
@@ -140,7 +140,6 @@ fun main() {
     println("delete note________________________")
     noteServ.deleteComment(note1, commentNew)
     noteServ.print()*/
-
 }
 
 
