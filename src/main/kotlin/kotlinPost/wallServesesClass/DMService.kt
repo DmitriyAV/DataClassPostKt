@@ -18,13 +18,13 @@ object DMService {
                 }
             }
         }
-        return true
+        throw UserNotFoundException("Message")
     }
 
     fun addMessage(message: Message) { directMessage += message }
 
-    fun updateMessage(messageOld: Message, messageNew: Message) {
-        if (isContains(messageOld.idUser, messageOld.fromId)) {
+    fun updateMessage(messageOld: Message, messageNew: Message): Boolean {
+      return if (isContains(messageOld.idUser, messageOld.fromId)) {
             directMessage.remove(messageNew)
             directMessage.add(messageNew)
 

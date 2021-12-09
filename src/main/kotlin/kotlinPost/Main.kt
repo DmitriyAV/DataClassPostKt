@@ -67,23 +67,15 @@ fun main() {
     val user4 = 3
     val user6 = 6
 
-    val message = Message(4, 2, dateRandom, 1, title, true)
-    val message2 = Message(3, 4, dateRandom, 2, title, true)
-    val message3 = Message(4, 2, dateRandom, 3, title, false)
-    val message4 = Message(2, 3, dateRandom, 10, title, true)
-    val message5 = Message(4, 2, dateRandom, 5, title, true)
-    val message6 = Message(3, 2, dateRandom, 6, title, true)
+    val message = Message(4, 2,  1, title, true)
+    val message2 = Message(3, 4, 2, title, true)
+    val message3 = Message(4, 2, 3, title, false)
+    val message4 = Message(2, 3, 10, title, true)
+    val message5 = Message(4, 2, 5, title, true)
+    val message6 = Message(3, 2, 6, title, true)
 
-    /*   val user = User(2)
-       val user2 = User(4)
-       val user4 = User(3)
-       val user6 = User(6)*/
 
     val chatService = DMService
-/*
-    chatService.addUsers(user)
-    chatService.addUsers(user2)
-    chatService.addUsers(user4)*/
 
     chatService.addMessage(message)
     chatService.addMessage(message2)
@@ -105,7 +97,7 @@ fun main() {
     chatService.getChats()
 
 
-    /*// Добавление Постов
+    // Добавление Постов
     wallServ.add(post)
     wallServ.add(post1)
     wallServ.add(post2)
@@ -139,7 +131,7 @@ fun main() {
     noteServ.delete(note1)
     println("delete note________________________")
     noteServ.deleteComment(note1, commentNew)
-    noteServ.print()*/
+    noteServ.print()
 }
 
 
