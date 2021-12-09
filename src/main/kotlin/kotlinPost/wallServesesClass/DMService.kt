@@ -11,29 +11,33 @@ object DMService {
 
     private fun isContains(userId: Int, fromId: Int): Boolean {
         if (directMessage.isNotEmpty()) {
-            directMessage.forEach {
+            directMessage.find {
                 return when (it.idUser == userId && it.fromId == fromId) {
                     true -> true
                     else -> false
                 }
-            }
+            } != null
         }
-        throw UserNotFoundException("Message")
+        return false
     }
 
-    fun addMessage(message: Message) { directMessage += message }
+    fun addMessage(message: Message) {
+        directMessage += message
+    }
 
     fun updateMessage(messageOld: Message, messageNew: Message): Boolean {
-      return if (isContains(messageOld.idUser, messageOld.fromId)) {
+        return if (isContains(messageOld.idUser, messageOld.fromId)) {
             directMessage.remove(messageNew)
             directMessage.add(messageNew)
 
         } else throw MessageNotFoundException("Message under id #${messageOld.id} don't exits")
     }
 
-    fun getUnreadChatsCount(): Int { return directMessage.count { message -> !message.isRead } }
+    fun getUnreadChatsCount(): Int {
+        return directMessage.count { message -> !message.isRead }
+    }
 
-    fun getChats() {
+    fun printChats() {
         if (directMessage.isNotEmpty())
             directMessage.forEach {
                 println("Chat with User under id#${it.idUser} \n $it")
@@ -46,10 +50,10 @@ object DMService {
         println("Chat with User under id#${userId} with messages: \n $quantity")
     }
 
-    fun getMessagesWithId(userId: Int, fromId: Int, messageId: Int) {
+    fun getMessagesWithId(userId: Int, fromId: Int, messageId: Int): List<Message> {
         if (isContains(userId, fromId)) {
             return directMessage.filter { message -> message.id == messageId }
-                .forEach {  println("Chat with User under id#${userId} with messages: $it") }
+
         } else throw MessageNotFoundException("Message with id#${messageId} don't exist")
 
     }
@@ -65,15 +69,17 @@ object DMService {
     }
 
     fun deleteMessage(userId: Int, fromId: Int, messageId: Int): Boolean {
-        directMessage.forEach {
-            if (it.idUser == userId && it.fromId == fromId) {
-                if (it.id == messageId) {
-                    directMessage.remove(it)
-                    return true
-                } else throw MessageNotFoundException("Message with id#${messageId} don't exist")
-            }
+        directMessage.find {
+            isContains(userId, fromId)
+            if (it.id == messageId) {
+                directMessage.remove(it)
+                return true
+            } else throw MessageNotFoundException("Message with id#${messageId} don't exist")
+
         }
         throw UserNotFoundException("User with id#${userId} doesn't exist")
     }
+
 }
+
 

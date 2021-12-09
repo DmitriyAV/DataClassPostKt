@@ -1,7 +1,7 @@
 package kotlinPost.wallServesesClass
 
 import kotlinPost.dataClass.dt_directmasseges.Message
-import kotlinPost.excaption.MessageNotFoundException
+
 import kotlinPost.excaption.UserNotFoundException
 import kotlinPost.title
 import org.junit.Test

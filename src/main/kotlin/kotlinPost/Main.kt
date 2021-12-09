@@ -1,6 +1,5 @@
 package kotlinPost
 
-import User
 import kotlinPost.attachment.*
 import kotlinPost.dataClass.*
 import kotlinPost.dataClass.dt_directmasseges.Message
@@ -82,7 +81,7 @@ fun main() {
     chatService.addMessage(message3)
     chatService.addMessage(message5)
     chatService.addMessage(message6)
-    chatService.getChats()
+    chatService.printChats()
     println("Act some changes")
     println("______________________________________________________________")
     chatService.getMessage(user2)
@@ -94,7 +93,7 @@ fun main() {
     println("______________________________________________________________")
     chatService.deleteMessage(user4, user2, 2)
     chatService.deleteChat(user2, user)
-    chatService.getChats()
+    chatService.printChats()
 
 
     // Добавление Постов
