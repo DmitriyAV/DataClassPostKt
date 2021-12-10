@@ -16,7 +16,7 @@ class CrudServicesTest {
     fun create() {
         val service = WallService
 
-         service.add(Post(
+        val expectedPost = Post(
              id = 0,
              ownerId = 14124,
              fromId = 12312,
@@ -41,59 +41,13 @@ class CrudServicesTest {
              isFavorite = false,
              donut = donut,
              postponedId = 12314
-         ))
+         )
 
-        val result = Post(
-            id = 0,
-            ownerId = 14124,
-            fromId = 12312,
-            createdBy = 1231,
-            date = 21,
-            message = text,
-            replyOwnerId = 2123,
-            replyPostId = 14112,
-            friendsOnly = true,
-            comments = comment,
-            copyright = copyright,
-            likes = likes,
-            reposts = repost,
-            views = view,
-            postType = copyright.type,
-            signerId = 1124,
-            canPin = true,
-            canDelete = false,
-            canEdit = false,
-            isPinned = false,
-            markedAsAds = true,
-            isFavorite = false,
-            donut = donut,
-            postponedId = 12314
-        )
+        service.add(expectedPost)
 
-        assertEquals( Post( id = 0,
-            ownerId = 14124,
-            fromId = 12312,
-            createdBy = 1231,
-            date = 21,
-            message = text,
-            replyOwnerId = 2123,
-            replyPostId = 14112,
-            friendsOnly = true,
-            comments = comment,
-            copyright = copyright,
-            likes = likes,
-            reposts = repost,
-            views = view,
-            postType = copyright.type,
-            signerId = 1124,
-            canPin = true,
-            canDelete = false,
-            canEdit = false,
-            isPinned = false,
-            markedAsAds = true,
-            isFavorite = false,
-            donut = donut,
-            postponedId = 12314), result )
+        val result = service.getById(expectedPost.id)
+
+        assertEquals(result, expectedPost)
 
     }
 
@@ -120,16 +74,15 @@ class CrudServicesTest {
     }
 
     @Test
-    fun addComment() {
+    fun addComments() {
         val ser = WallService
-
-
-        ser.add( Post(
+        val result =  Post(
             3, 3, 1, 2, 1, text, 2, 1,
             true, comment, copyright, likes, repost, view, copyright.type, 2, false,
             true, false, false, true, false, donut, 1
-        ))
+        )
 
+        ser.add(result)
 
         ser.add(Post(
             4, 211, 221, 231, 1, text, 24, 25,
@@ -140,6 +93,10 @@ class CrudServicesTest {
             1, Attachments.AudioAtt(audioAttach) , arrayParent , thread, true, true, true, true))
 
         ser.addComment(comm)
+
+        ser.getById(result.id)
+        ser.getById(comm.id)
+
     }
 
     @Test

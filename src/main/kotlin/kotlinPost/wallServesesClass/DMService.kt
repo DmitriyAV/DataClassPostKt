@@ -7,41 +7,29 @@ import kotlinPost.excaption.UserNotFoundException
 
 object DMService {
 
-    //private var directMessagesMap = mutableMapOf<Int, MutableList<Message>>()
-    var directMessage = mutableListOf<Message>()
-
+    private var directMessage = mutableListOf<Message>()
 
     private fun isContains(userId: Int, fromId: Int): Boolean {
         if (directMessage.isNotEmpty()) {
-            for (message in directMessage) {
-                return when (message.idUser == userId && message.fromId == fromId) {
+            directMessage.find {
+                return when (it.idUser == userId && it.fromId == fromId) {
                     true -> true
                     else -> false
                 }
-            }
+            } != null
         }
-        return true
+        return false
     }
-
-/*    fun addUsers(user: User): User {
-        if (!isContains(user.idUser)) {
-            directMessage[user.idUser] = mutableListOf()
-        }
-        return user
-    }*/
 
     fun addMessage(message: Message) {
-        // when (isContains(message.idUser, message.fromId)) {
-        /*true ->*/ directMessage += message
-
-        // else -> throw UserNotFoundException("User under id #${message.idUser} is already exist")
-        //   }
+        directMessage += message
     }
 
-    fun updateMessage(messageOld: Message, messageNew: Message) {
-        if (isContains(messageOld.idUser, messageOld.fromId)) {
-            directMessage.remove(messageOld)
-            addMessage(messageNew)
+    fun updateMessage(messageOld: Message, messageNew: Message): Boolean {
+        return if (isContains(messageOld.idUser, messageOld.fromId)) {
+            directMessage.remove(messageNew)
+            directMessage.add(messageNew)
+
         } else throw MessageNotFoundException("Message under id #${messageOld.id} don't exits")
     }
 
@@ -49,30 +37,25 @@ object DMService {
         return directMessage.count { message -> !message.isRead }
     }
 
-    fun getChats() {
-        directMessage.forEach {
-            if (directMessage.isNotEmpty())
+    fun printChats() {
+        if (directMessage.isNotEmpty())
+            directMessage.forEach {
                 println("Chat with User under id#${it.idUser} \n $it")
-            println("______________________________________________________________")
-        }
+                println("______________________________________________________________")
+            }
     }
-
 
     fun getMessage(userId: Int) {
         val quantity = directMessage.count { message -> message.idUser == userId }
         println("Chat with User under id#${userId} with messages: \n $quantity")
     }
 
-
     fun getMessagesWithId(userId: Int, fromId: Int, messageId: Int): List<Message> {
         if (isContains(userId, fromId)) {
             return directMessage.filter { message -> message.id == messageId }
+
         } else throw MessageNotFoundException("Message with id#${messageId} don't exist")
 
-    }
-
-    fun printGetMessages(quantity: List<Message>, userId: Int) {
-        println("Chat with User under id#${userId} with messages: $quantity")
     }
 
     fun deleteChat(userId: Int, fromId: Int): Boolean {
@@ -86,17 +69,17 @@ object DMService {
     }
 
     fun deleteMessage(userId: Int, fromId: Int, messageId: Int): Boolean {
-        for (it in directMessage) {
-            if (it.idUser == userId && it.fromId == fromId) {
-                if (it.id == messageId) {
-                    directMessage.remove(it)
-                    return true
-                } else throw MessageNotFoundException("Message with id#${messageId} don't exist")
+        directMessage.find {
+            isContains(userId, fromId)
+            if (it.id == messageId) {
+                directMessage.remove(it)
+                return true
+            } else throw MessageNotFoundException("Message with id#${messageId} don't exist")
 
-            }
         }
-
         throw UserNotFoundException("User with id#${userId} doesn't exist")
     }
+
 }
+
 

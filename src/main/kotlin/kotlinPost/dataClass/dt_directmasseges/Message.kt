@@ -4,13 +4,10 @@ package kotlinPost.dataClass.dt_directmasseges
 data class Message(
     val idUser: Int,
     val fromId: Int,
-    val date: Int,
     val id: Int,
     val message: String,
     var isEntered: Boolean = true,
     var isRead: Boolean = false,
-
-
     ) {
 
     private fun setIsReadied(): String {
@@ -31,7 +28,6 @@ data class Message(
     override fun toString(): String {
         return "${setIsReadied()} ${setIsEntered()} Message under id#$id  \n" +
                 "from user #$fromId \n" +
-                "Text: $message \n" +
-                "Date: $date"
+                "Text: $message \n"
     }
 }
