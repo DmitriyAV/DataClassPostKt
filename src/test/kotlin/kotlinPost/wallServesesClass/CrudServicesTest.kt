@@ -94,8 +94,7 @@ class CrudServicesTest {
 
         ser.addComment(comm)
 
-        ser.getById(result.id)
-        ser.getById(comm.id)
+        assertEquals(ser.getById(result.id), ser.getById(comm.id))
 
     }
 
